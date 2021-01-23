@@ -2,5 +2,5 @@
 Material for K8S and Ansible training
 
 ### Course Content & day wise plan:
-[K8S](K8S.md)
+- [K8S](K8S.md)
 	
