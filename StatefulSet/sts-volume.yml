@@ -1,0 +1,50 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: www-web-1
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/tmp/data01"
+
+---
+
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: www-web-2
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/tmp/data02"
+	
+---
+
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: www-web-3
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/tmp/data03"
+	
+---
