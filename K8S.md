@@ -18,3 +18,5 @@
     - Quota
     - LimitRanges
     - Contol pod scheduling
+    - authenticating with k8s platform
+    - RBAC
