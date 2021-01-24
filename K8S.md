@@ -18,5 +18,7 @@
     - Quota
     - LimitRanges
     - Contol pod scheduling
+- Day-5:
     - authenticating with k8s platform
     - RBAC
+    - working with K8S dashboard
