@@ -23,4 +23,9 @@
 - Day-5:
     - authenticating with k8s platform
     - RBAC
-    - working with K8S dashboard
+- Day-6:
+    - configmaps
+    - secrets
+    - hostpath
+    - emptyDir
+    - Persistent volumes
