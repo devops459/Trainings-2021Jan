@@ -23,9 +23,12 @@
 - Day-5:
     - authenticating with k8s platform
     - RBAC
-- Day-6:
     - configmaps
     - secrets
     - hostpath
     - emptyDir
+- Day-6:
     - Persistent volumes
+    - Services & load balancing
+    - DNS
+    
