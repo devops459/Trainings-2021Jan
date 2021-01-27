@@ -29,6 +29,25 @@
     - emptyDir
 - Day-6:
     - Persistent volumes
+- Day-7:
     - Services & load balancing
     - DNS
+    - cluster networking
+    - network policies
+- Day-8:
+    - K8S cluster setup
+    - Addons
+       - DNS
+       - Networking
+       - dashboard
+       - metrics
+- Day-9:
+    - Cluster adminstration 
+        - Adding a new node to cluster 
+	- Deleting  node to cluster 
+	- cordon & uncodon node 
+	- evacuate pods 
+	- process to upgrade a cluster 
+	- common issues & trobleshooting 
+ 
     
