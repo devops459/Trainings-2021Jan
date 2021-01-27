@@ -44,10 +44,10 @@
 - Day-9:
     - Cluster adminstration 
         - Adding a new node to cluster 
-	- Deleting  node to cluster 
-	- cordon & uncodon node 
-	- evacuate pods 
-	- process to upgrade a cluster 
-	- common issues & trobleshooting 
+        - Deleting a node from cluster 
+        - cordon & uncodon node 
+        - evacuate pods 
+        - process to upgrade a cluster 
+        - common issues & trobleshooting 
  
     
