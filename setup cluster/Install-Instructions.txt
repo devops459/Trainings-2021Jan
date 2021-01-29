@@ -1,0 +1,19 @@
+1) Install docker, kubeadm, kubelet & kubectl 
+	# sh Install-Runtime.sh 
+	# sh Installing-Kubeadm.sh
+
+2) Setup Control plane
+	# kubeadm init --node-name master --pod-network-cidr 10.244.0.0/16 --service-cidr 10.96.0.0/12
+	# mkdir /root/.kube
+	# cp /etc/kubernetes/admin.conf /root/.kube/configbboard
+3) Install addon's 
+	- canal	
+		# kubectl apply -f ../add-ons/deploy_canal.yaml
+	- dashboard
+		# kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.1.0/aio/deploy/recommended.yaml
+	- metrics 
+		# kubectl apply -f ../add-ons/deploy_metric_server.yaml
+4) Add nodes to cluster 
+	- Grab the bootstrap token from the controlplane setup, this looks some thing like the following 
+	- kubeadm join 172.31.21.40:6443 --token lmac9r.u3y5y3ykxwsiv8jd \
+				--discovery-token-ca-cert-hash sha256:3c5baf9a99c93993d14a7ce8fb83d3abc17a52bf5e4149f23ca178f2807879e9 --node-name node1
