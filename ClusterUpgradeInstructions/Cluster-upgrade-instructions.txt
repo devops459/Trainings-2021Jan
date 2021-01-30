@@ -1,0 +1,24 @@
+kubernetes upgrade : (Upgrade from 1.18 to 1.19)
+
+control plane : (execute all these instructions from control-plane node)
+	# yum list --showduplicates kubeadm --disableexcludes=kubernetes
+	# yum install -y kubeadm-1.19.7-0 --disableexcludes=kubernetes
+	# kubeadm version
+	# kubeadm cordon master
+	# kubeadm drain master --ignore-daemonsets
+	# kubeadm upgrade plan
+	# kubeadm upgrade apply v1.19.7
+	# yum install -y kubelet-1.19.7-0 kubectl-1.19.7-0 --disableexcludes=kubernetes
+	# systemctl daemon-reload
+	# systemctl restart kubelet
+	# kubeadm uncordon master
+	
+worker nodes : (Upgrade one node at a time)
+	# kubeadm cordon <node-name>   (Execute this command from any control-plane node)
+	# kubeadm drain <node-name> --ignore-daemonsets  (Execute this command from any control-plane node)
+	# kubeadm upgrade node 
+	# yum install -y kubeadm-1.19.7-0 --disableexcludes=kubernetes (On respective node)
+	# systemctl daemon-reload (On respective node)
+	# systemctl restart kubelet (On respective node)
+	# kubeadm uncordon <node-name>    (Execute this command from any control-plane node)
+
