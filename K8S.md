@@ -47,6 +47,7 @@
         - Deleting a node from cluster 
         - cordon & uncodon node 
         - evacuate pods 
+	- kubernetes version skew
         - process to upgrade a cluster 
         - common issues & trobleshooting 
  
