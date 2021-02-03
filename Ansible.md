@@ -6,12 +6,14 @@
     - Upgrade Ansible 
     - Setup trust between hosts 
     - Working with inventory file
-    - Modules
-    - Adhoc Commands
     
  - Day-2:
+    - Modules
+    - Adhoc Commands
     - Playbooks
     - Handlers
+    
+ - Day-3:
     - Roles
     - variables  
     - Conditional Statements 
