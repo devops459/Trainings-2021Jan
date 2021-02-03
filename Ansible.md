@@ -8,3 +8,12 @@
     - Working with inventory file
     - Modules
     - Adhoc Commands
+    
+ - Day-2:
+    - Playbooks
+    - Handlers
+    - Roles
+    - variables  
+    - Conditional Statements 
+    - Loops
+    - Advance features
