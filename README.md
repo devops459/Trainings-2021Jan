@@ -7,4 +7,5 @@ Material for K8S and Ansible training
 
 ### Session recordings location
 - [K8S](https://drive.google.com/drive/folders/1fucrri4p9__O1LS8PZKicXJ7ZrKC7LeL?usp=sharing)
+- [Ansible](https://drive.google.com/drive/folders/1sf5JBixpHlmr_P1tEFTlsl2NoiaEtL0t?usp=sharing)
 	
