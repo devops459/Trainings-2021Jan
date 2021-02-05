@@ -1,0 +1,8 @@
+- hosts: apache
+  tasks:
+  - action: uri url=http://{{ inventory_hostname }}:8080 return_content=yes
+    delegate_to: localhost
+    register: result
+    until: "result.content.find('Ansible') != -1"
+    retries: 18
+    delay: 10
