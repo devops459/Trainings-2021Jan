@@ -1,13 +1,12 @@
-- name: Test Loops 
-  hosts: all
-  tasks:
-    - name: Ansible with items example
-      yum:
-        name: "{{ item }}"
-        state: present
-      with_items:
-        - httpd
-        - ca-certificates
-        - git
-        - bind-utils
-     
+  - name: Install binaries 
+    hosts: all
+    tasks:
+      - name: Ansible with items example
+        yum:
+          name: "{{ item }}"
+          state: present
+        with_items:
+          - httpd
+          - ca-certificates
+          - git
+          - bind-utils

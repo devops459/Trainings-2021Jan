@@ -3,7 +3,6 @@
   hosts: apache
   roles:
     - role: update-apache-port
-    - role: create-iptable-rules
     - role: update-apache-loglevel 
 
 ...
