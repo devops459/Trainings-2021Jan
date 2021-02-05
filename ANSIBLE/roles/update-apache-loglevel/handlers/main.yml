@@ -1,0 +1,7 @@
+---
+# handlers file for update-apache-loglevel
+- name: restart iptables
+  service:
+       name: iptables
+       state: restarted
+  listen: restart service

@@ -1,0 +1,35 @@
+---
+- name : Update Apache Port
+  hosts: apache
+  tasks:
+   - name: Update port number to {{ APACHE_PORT }}
+     lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: 'Listen'
+        line: 'Listen {{ APACHE_PORT }}'
+        state: present
+
+   - name: Restart Apache & Iptables
+     service:
+        name: '{{ item }}'
+        state: restarted
+     with_items:
+        - httpd
+
+- name: Update Log level of Apache
+  hosts: apache
+  tasks:
+   - name: Update Log level of  Apache
+     lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: 'LogLevel'
+        line: 'LogLevel "{{ LOG_LEVEL }}"'
+        state: present
+
+   - name: Restart Apache
+     service:
+        name: httpd
+        state: restarted
+
+...
+

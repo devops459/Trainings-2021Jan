@@ -1,0 +1,33 @@
+
+---
+- name: Setup Apache
+  hosts: haproxy
+  tasks:
+    - name: Install haproxy
+      yum:
+       name: http://mirror.centos.org/centos/7/os/x86_64/Packages/haproxy-1.5.18-9.el7.x86_64.rpm
+       state: present
+
+    - name: Update first backend in haproxy config file
+      replace:
+        path: /etc/haproxy/haproxy.cfg
+        regexp: 127.0.0.1:5001
+        replace: "{{ groups['apache'][0] }}:8080"
+
+    - name: Update second backend in haproxy config file
+      replace:
+        path: /etc/haproxy/haproxy.cfg
+        regexp: 127.0.0.1:5002
+        replace: "{{ groups['apache'][1] }}:8080"
+
+    - name: Remode addional default backends in haproxy config file
+      lineinfile:
+        path: /etc/haproxy/haproxy.cfg
+        regexp: 127.0.0.1:500[3-4]
+        state: absent
+
+    - name: Start haproxy servers
+      service:
+        name: haproxy
+        state: started
+

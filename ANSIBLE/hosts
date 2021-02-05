@@ -1,0 +1,11 @@
+[haproxy]
+host3
+
+[apache]
+host1
+host2
+
+[apache:vars]
+APACHE_PORT=10080
+SERVER_ROOT='/etc/httpd/'
+LOG_LEVEL=debug

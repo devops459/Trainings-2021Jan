@@ -1,0 +1,11 @@
+---
+# tasks file for update-apache-port
+- name: Update http port to {{ APACHE_PORT }} on which apache listens
+  lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: 'Listen'
+        line: 'Listen {{ APACHE_PORT }}'
+        state: present
+  notify:
+        - restart apache
+

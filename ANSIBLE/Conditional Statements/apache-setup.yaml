@@ -1,0 +1,48 @@
+
+---
+- name: Setup Apache
+  hosts: apache
+  tasks:
+    - name: Install httpd and pre-req packages
+      yum:
+       name:
+         - http://mirror.centos.org/centos/7/os/x86_64/Packages/httpd-tools-2.4.6-93.el7.centos.x86_64.rpm
+         - http://mirror.centos.org/centos/7/os/x86_64/Packages/httpd-2.4.6-93.el7.centos.x86_64.rpm
+       state: present
+
+    - name: Update http port on which apache listens
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: 'Listen 80'
+        line: 'Listen 8080'
+        state: present
+
+    - name: Enable Firewall rules to allow traffic for apache instance
+      lineinfile:
+        path: /etc/sysconfig/iptables
+        insertbefore: 'COMMIT'
+        line: '-A OS_FIREWALL_ALLOW -p tcp -m state --state NEW -m tcp --dport 8080 -j ACCEPT'
+        state: present
+        backup: true
+
+    - name: Copy Apache Homepage
+      copy:
+        src: /tmp/ansible/index.html
+        dest: /var/www/html/
+        mode: 0644
+
+    - name: Update host name on the homepage
+      replace:
+        path: /var/www/html/index.html
+        regexp: HOSTNAME
+        replace: '{{ inventory_hostname }}'
+
+    - name: Start Apache servers
+      service:
+        name: httpd
+        state: started
+
+    - name: Restart Iptable service
+      service:
+        name: iptables
+        state: restarted

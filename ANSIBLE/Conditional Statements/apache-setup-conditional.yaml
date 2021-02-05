@@ -1,0 +1,44 @@
+
+---
+- name: Setup Apache
+  hosts: apache
+  tasks:
+    - name: Install httpd and pre-req packages
+      yum:
+       name:
+         - http://mirror.centos.org/centos/7/os/x86_64/Packages/httpd-tools-2.4.6-93.el7.centos.x86_64.rpm
+         - http://mirror.centos.org/centos/7/os/x86_64/Packages/httpd-2.4.6-93.el7.centos.x86_64.rpm
+       state: present   
+       register: apache_install_status
+      when: ansible_distribution = "CentOS"
+
+    - name: Update http port on which apache listens to {{ APACHE_PORT }}
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: 'Listen 80'
+        line: 'Listen {{ APACHE_PORT }}'
+        state: present
+      when: 
+         - APACHE_PORT is defined 
+         - apache_install_status.failed is false
+
+    - name: Copy Apache Homepage
+      copy:
+        src: /opt/splunk/index.html
+        dest: /var/www/html/
+        mode: 0644
+        register: copy_status
+  
+    - name: Update host name on the homepage
+      replace:
+        path: /var/www/html/index.html
+        regexp: HOSTNAME
+        replace: '{{ inventory_hostname }}'
+      when: copy_status is succeeded 
+
+    - name: Start Apache servers
+      service:
+        name: httpd
+        state: started
+
+

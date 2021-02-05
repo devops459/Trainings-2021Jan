@@ -1,0 +1,11 @@
+---
+# tasks file for create-iptable-rules
+- name: Add Iptables rule for port {{ APACHE_PORT }} to access Apache from external host
+  lineinfile:
+        path: /etc/sysconfig/iptables
+        insertbefore: 'COMMIT'
+        line: '-A OS_FIREWALL_ALLOW -p tcp -m state --state NEW -m tcp --dport {{ APACHE_PORT }} -j ACCEPT'
+        state: present
+        backup: true
+  notify:
+        - restart iptables

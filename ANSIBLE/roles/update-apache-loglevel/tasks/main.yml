@@ -1,0 +1,10 @@
+---
+# tasks file for update-apache-loglevel to {{ LOG_LEVEL }}
+- name: Update Log Level of Apache
+  lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: 'LogLevel'
+        line: 'LogLevel "{{ LOG_LEVEL }}"'
+        state: present
+  notify:
+        - restart apache
