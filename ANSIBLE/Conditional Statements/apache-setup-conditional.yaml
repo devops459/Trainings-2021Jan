@@ -9,6 +9,15 @@
       register: apache_install_status
       when: ansible_distribution == "CentOS"
 
+    - name: Install httpd and pre-req packages UBUNTU
+      yum:
+       name:
+         - http://mirror.centos.org/centos/7/os/x86_64/Packages/httpd-tools-2.4.6-95.el7.centos.x86_64.rpm
+         - http://mirror.centos.org/centos/7/os/x86_64/Packages/httpd-2.4.6-95.el7.centos.x86_64.rpm
+       state: present
+      register: apache_install_status
+      when: ansible_distribution == "DUMMY"
+
     - name: Update http port on which apache listens to {{ APACHE_PORT }}
       lineinfile:
         path: /etc/httpd/conf/httpd.conf
@@ -17,11 +26,11 @@
         state: present
       when:
          - APACHE_PORT is defined
-         - apache_install_status.failed is false
+         - apache_install_status is succeeded
 
     - name: Copy Apache Homepage
       copy:
-        src: /tmp/ansible/index.html
+        src: /tmp/index.html
         dest: /var/www/html/
         mode: 0644
       register: copy_status
