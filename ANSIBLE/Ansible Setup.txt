@@ -1,0 +1,30 @@
+Installing Ansible:
+	yum install https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ansible-2.7.1-1.el7.ans.noarch.rpm -y
+	yum install https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ansible-2.8.0-1.el7.ans.noarch.rpm -y
+	yum update ansible -y
+	
+	ansible --version
+Customising environment:
+	log_path = /var/log/ansible.log (in ansible.cfg file )
+	export ANSIBLE_LOG_PATH="/tmp/ansible/ansible-2.log" (environment variable)
+	
+	forks          = 5 (in ansible.cfg file )
+	export ANSIBLE_FORKS=2 (environment variable)
+	-f or --forks (command line option)
+
+Setuptrust:
+	ssh-keygen -t rsa (On Source machine)
+	scp /root/.ssh/id_rsa.pub kubadm@3.25.52.56:/tmp/ (On remote machine)
+	cat /tmp/id_rsa.pub >> /root/.ssh/authorized_keys (On remote machine)
+	
+Adhoc commands :
+	-	ansible atlanta -m copy -a "src=/etc/hosts dest=/tmp/hosts"
+	-	ansible webservers -m file -a "dest=/srv/foo/a.txt mode=600"
+	-	$ ansible webservers -m file -a "dest=/srv/foo/b.txt mode=600 owner=mdehaan group=mdehaan"
+	-	ansible webservers -m file -a "dest=/path/to/c mode=755 owner=mdehaan group=mdehaan state=directory"
+	-	ansible webservers -m file -a "dest=/path/to/c state=absent"
+		-	ansible webservers -m yum -a "name=acme state=present"
+	-	ansible webservers -m service -a "name=httpd state=started"
+	-	ansible atlanta -a "/sbin/reboot" -f 10
+	-	ansible -u carol -e 'ansible_user=brian' -a whoami all
+
